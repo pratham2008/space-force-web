@@ -121,7 +121,7 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Leaderboard Overlay */}
+      {/* Leaderboard Overlay yaya*/}
       <AnimatePresence>
         {showLeaderboard && (
           <LeaderboardPanel onClose={() => setShowLeaderboard(false)} />
