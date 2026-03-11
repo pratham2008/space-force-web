@@ -20,6 +20,9 @@ export function LeaderboardPanel({ onClose }: { onClose: () => void }) {
   const { playSfx } = useAudioEngine();
 
   useEffect(() => {
+    // Prevent body scrolling when leaderboard is open
+    document.body.style.overflow = 'hidden';
+    
     const q = query(
       collection(db, "leaderboard"),
       orderBy("score", "desc"),
@@ -44,7 +47,11 @@ export function LeaderboardPanel({ onClose }: { onClose: () => void }) {
       setLoading(false);
     });
 
-    return () => unsubscribe();
+    return () => {
+      // Restore body scrolling
+      document.body.style.overflow = 'unset';
+      unsubscribe();
+    };
   }, []);
 
   const handleClose = () => {
@@ -58,26 +65,26 @@ export function LeaderboardPanel({ onClose }: { onClose: () => void }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 1.05 }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-start bg-[#020617]/95 backdrop-blur-xl px-4 py-8 overflow-hidden"
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-start bg-[#020617]/95 backdrop-blur-xl px-2 sm:px-4 py-4 sm:py-8 overflow-hidden h-[100dvh]"
     >
       <div className="absolute inset-0 pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjMiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjEiIGZpbGw9InJnYmEoMzQsMjExLDIzOCwwLjEpIi8+PC9zdmc+')] mix-blend-screen opacity-50" />
 
       {/* Header */}
-      <div className="w-full max-w-2xl flex items-center justify-between mb-8 relative z-10 shrink-0">
+      <div className="w-full max-w-2xl flex items-center justify-between mb-4 sm:mb-8 relative z-10 shrink-0">
         <button 
           onClick={handleClose}
-          className="p-3 bg-cyan-900/40 border-2 border-cyan-500/50 rounded-xl text-cyan-400 hover:bg-cyan-500 hover:text-[#020617] transition-all hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(34,211,238,0.3)]"
+          className="p-2 sm:p-3 bg-cyan-900/40 border-2 border-cyan-500/50 rounded-xl text-cyan-400 hover:bg-cyan-500 hover:text-[#020617] transition-all hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(34,211,238,0.3)]"
         >
-          <ArrowLeft size={28} strokeWidth={3} />
+          <ArrowLeft className="w-6 h-6 sm:w-7 sm:h-7" strokeWidth={3} />
         </button>
-        <h2 className="text-3xl md:text-5xl font-black tracking-widest text-white uppercase drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">
+        <h2 className="text-xl sm:text-3xl md:text-5xl font-black tracking-widest text-white uppercase drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">
           LEADERBOARD
         </h2>
-        <div className="w-14" /> {/* Spacer for centering */}
+        <div className="w-10 sm:w-14" /> {/* Spacer for centering */}
       </div>
 
       {/* List Container */}
-      <div className="flex-1 w-full max-w-2xl border-2 border-cyan-500/30 rounded-3xl bg-[#020617]/80 overflow-y-auto overflow-x-hidden p-4 md:p-6 mb-8 relative z-10 shadow-[inset_0_0_30px_rgba(34,211,238,0.1)] custom-scrollbar">
+      <div className="flex-1 w-full max-w-2xl border-2 border-cyan-500/30 rounded-2xl sm:rounded-3xl bg-[#020617]/80 overflow-y-auto overflow-x-hidden p-2 sm:p-4 md:p-6 mb-4 sm:mb-8 relative z-10 shadow-[inset_0_0_30px_rgba(34,211,238,0.1)] custom-scrollbar min-h-0">
         <AnimatePresence>
           {loading ? (
             // Skeleton Loader
@@ -88,19 +95,19 @@ export function LeaderboardPanel({ onClose }: { onClose: () => void }) {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ delay: i * 0.05 }}
-                className="flex items-center justify-between p-4 mb-3 rounded-xl border border-cyan-500/20 bg-cyan-900/10"
+                className="flex items-center justify-between p-3 sm:p-4 mb-2 sm:mb-3 rounded-xl border border-cyan-500/20 bg-cyan-900/10"
               >
-                <div className="flex items-center gap-4">
-                  <div className="w-8 h-8 rounded bg-cyan-500/20 animate-pulse" />
-                  <div className="w-32 h-6 rounded bg-cyan-500/20 animate-pulse" />
+                <div className="flex items-center gap-2 sm:gap-4">
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 rounded bg-cyan-500/20 animate-pulse" />
+                  <div className="w-20 sm:w-32 h-4 sm:h-6 rounded bg-cyan-500/20 animate-pulse" />
                 </div>
-                <div className="w-24 h-6 rounded bg-cyan-500/20 animate-pulse" />
+                <div className="w-16 sm:w-24 h-4 sm:h-6 rounded bg-cyan-500/20 animate-pulse" />
               </motion.div>
             ))
           ) : entries.length === 0 ? (
-            <div className="h-full flex items-center justify-center flex-col text-cyan-500/50 uppercase tracking-widest font-bold">
-              <span className="text-4xl mb-4">📡</span>
-              No signals received.
+            <div className="h-full flex items-center justify-center flex-col text-cyan-500/50 uppercase tracking-widest font-bold text-center px-4">
+              <span className="text-3xl sm:text-4xl mb-2 sm:mb-4">📡</span>
+              <span className="text-sm sm:text-base">No signals received.</span>
             </div>
           ) : (
             // Actual Data
@@ -126,19 +133,19 @@ export function LeaderboardPanel({ onClose }: { onClose: () => void }) {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ type: "spring", stiffness: 200, damping: 20, delay: index * 0.05 }}
                   key={entry.id}
-                  className={`flex items-center justify-between p-4 md:p-5 mb-3 rounded-xl border-2 transition-colors ${styleClasses}`}
+                  className={`flex flex-row items-center justify-between p-3 sm:p-4 md:p-5 mb-2 sm:mb-3 rounded-xl border-2 transition-colors ${styleClasses}`}
                 >
-                  <div className="flex items-center gap-4 border-r border-white/10 pr-4 md:pr-6 shrink-0 md:w-20">
-                    <span className={`text-xl md:text-2xl font-black ${rankClasses}`}>
+                  <div className="flex items-center gap-2 sm:gap-4 border-r border-white/10 pr-2 sm:pr-4 md:pr-6 shrink-0 w-12 sm:w-16 md:w-20">
+                    <span className={`text-base sm:text-xl md:text-2xl font-black ${rankClasses}`}>
                       #{rank}
                     </span>
                   </div>
                   
-                  <div className="flex-1 px-4 truncate font-bold text-lg md:text-xl uppercase tracking-wider text-left">
+                  <div className="flex-1 px-2 sm:px-4 truncate font-bold text-sm sm:text-lg md:text-xl uppercase tracking-wider text-left">
                     {entry.username}
                   </div>
                   
-                  <div className="shrink-0 text-xl md:text-2xl font-black tracking-widest bg-[#020617]/50 px-3 py-1 rounded-md border border-white/5">
+                  <div className="shrink-0 text-sm sm:text-xl md:text-2xl font-black tracking-widest bg-[#020617]/50 px-2 sm:px-3 py-1 rounded-md border border-white/5">
                     {entry.score}
                   </div>
                 </motion.div>
@@ -147,27 +154,6 @@ export function LeaderboardPanel({ onClose }: { onClose: () => void }) {
           )}
         </AnimatePresence>
       </div>
-
-      {/* Footer Controls */}
-      {/* <div className="w-full max-w-2xl flex flex-col sm:flex-row gap-4 relative z-10 shrink-0">
-        <GameButton 
-          variant="secondary" 
-          onClick={handleClose}
-          className="w-full"
-        >
-          MAIN MENU
-        </GameButton>
-        <GameButton 
-          variant="primary" 
-          className="w-full"
-          onClick={() => {
-            playSfx('/audio/click.mp3');
-            alert("This connects to the game engine in the full App!");
-          }}
-        >
-          PLAY AGAIN
-        </GameButton>
-      </div> */}
 
     </motion.div>
   );
