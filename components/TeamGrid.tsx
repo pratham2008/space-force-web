@@ -6,7 +6,7 @@ import { motion, LayoutGroup } from 'framer-motion';
 
 export function TeamGrid() {
   return (
-    <section className="py-24 px-4 max-w-6xl mx-auto w-full relative z-20">
+    <section className="py-24 px-4 max-w-6xl mx-auto w-full relative z-10">
       <motion.div 
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -14,16 +14,16 @@ export function TeamGrid() {
         transition={{ duration: 0.8 }}
         className="mb-16 text-center"
       >
-        <h2 className="text-4xl md:text-5xl font-black text-white tracking-widest uppercase mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
-          SELECT PILOT
+        <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase mb-4">
+          The <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">Squad</span>
         </h2>
-        <div className="h-1 w-32 bg-cyan-500 mx-auto shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+        <p className="text-cyan-500/80 uppercase tracking-widest text-sm md:text-lg font-bold">Meet the legends.</p>
       </motion.div>
 
       <LayoutGroup>
         <motion.div 
           layout
-          className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
           {TEAM.map((pilot) => (
             <PilotCard key={pilot.id} pilot={pilot} />
