@@ -109,7 +109,7 @@ export function Hero() {
           className="flex flex-col gap-6 w-full max-w-xs md:max-w-sm mb-auto"
         >
           <GameButton variant="primary" className="w-full">
-            PLAY / DOWNLOAD APK
+            DOWNLOAD GAME
           </GameButton>
           <GameButton 
             variant="secondary" 
