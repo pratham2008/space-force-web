@@ -149,7 +149,7 @@ export function LeaderboardPanel({ onClose }: { onClose: () => void }) {
       </div>
 
       {/* Footer Controls */}
-      <div className="w-full max-w-2xl flex flex-col sm:flex-row gap-4 relative z-10 shrink-0">
+      {/* <div className="w-full max-w-2xl flex flex-col sm:flex-row gap-4 relative z-10 shrink-0">
         <GameButton 
           variant="secondary" 
           onClick={handleClose}
@@ -167,7 +167,7 @@ export function LeaderboardPanel({ onClose }: { onClose: () => void }) {
         >
           PLAY AGAIN
         </GameButton>
-      </div>
+      </div> */}
 
     </motion.div>
   );
