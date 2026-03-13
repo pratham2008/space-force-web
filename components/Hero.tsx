@@ -6,12 +6,14 @@ import { GameButton } from './GameButton';
 import { db } from '@/lib/firebase';
 import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 import { LeaderboardPanel } from './LeaderboardPanel';
+import { useAudioEngine } from '@/hooks/useAudioEngine';
 
 export function Hero() {
   const [bestScore, setBestScore] = useState<string | null>(null);
   const [bestUser, setBestUser] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const { playSfx } = useAudioEngine();
 
   useEffect(() => {
     async function fetchGlobalBest() {
@@ -43,6 +45,17 @@ export function Hero() {
 
     fetchGlobalBest();
   }, []);
+
+  const handleDownload = () => {
+    playSfx('/audio/click.mp3');
+    // Programmatically trigger the anchor download
+    const link = document.createElement('a');
+    link.href = '/game.apk';
+    link.download = 'Spaceforce.apk';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <section className="relative min-h-[100dvh] flex flex-col items-center justify-center pt-20 pb-10 z-10 overflow-hidden">
@@ -108,7 +121,11 @@ export function Hero() {
           transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
           className="flex flex-col gap-6 w-full max-w-xs md:max-w-sm mb-auto"
         >
-          <GameButton variant="primary" className="w-full">
+          <GameButton 
+            variant="primary" 
+            className="w-full"
+            onClick={handleDownload}
+          >
             DOWNLOAD GAME
           </GameButton>
           <GameButton 
@@ -121,7 +138,7 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Leaderboard Overlay yaya*/}
+      {/* Leaderboard Overlay */}
       <AnimatePresence>
         {showLeaderboard && (
           <LeaderboardPanel onClose={() => setShowLeaderboard(false)} />

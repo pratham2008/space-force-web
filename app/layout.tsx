@@ -9,7 +9,7 @@ const orbitron = Orbitron({
 });
 
 export const metadata: Metadata = {
-  title: "Spaceforce Arcade",
+  title: "SpaceForce",
   description: "The most unhinged space shooter on Android.",
 };
 
