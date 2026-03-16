@@ -58,7 +58,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-[100dvh] flex flex-col items-center justify-center pt-20 pb-10 z-10 overflow-hidden">
+    <section className={`relative min-h-[100dvh] flex flex-col items-center justify-center pt-20 pb-10 overflow-hidden ${showLeaderboard ? 'z-[100]' : 'z-10'}`}>
       <div className="flex flex-col items-center text-center max-w-5xl mx-auto w-full px-4">
         
         <motion.div
