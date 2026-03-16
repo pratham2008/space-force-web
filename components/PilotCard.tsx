@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Pilot } from '@/data/team';
 import { useAudioEngine } from '@/hooks/useAudioEngine';
-import { Github, Twitter } from 'lucide-react';
+import { Github, Twitter, Linkedin, InstagramIcon, Instagram } from 'lucide-react';
 
 export function PilotCard({ pilot }: { pilot: Pilot }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,14 +57,26 @@ export function PilotCard({ pilot }: { pilot: Pilot }) {
             <p className="text-cyan-100/80 text-center text-sm md:text-base px-2 mb-6 leading-relaxed max-w-sm">
               {pilot.bio}
             </p>
-            <div className="flex gap-4" onClick={(e) => e.stopPropagation()}>
-              <motion.a whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} href="#" className="p-3 rounded-full bg-white/5 hover:bg-cyan-500/20 text-cyan-400 transition-colors border border-white/10 hover:border-cyan-400/50">
-                <Github size={20} />
-              </motion.a>
-              <motion.a whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} href="#" className="p-3 rounded-full bg-white/5 hover:bg-cyan-500/20 text-cyan-400 transition-colors border border-white/10 hover:border-cyan-400/50">
-                <Twitter size={20} />
-              </motion.a>
-            </div>
+            {pilot.socials && pilot.socials.length > 0 && (
+              <div className="flex gap-4" onClick={(e) => e.stopPropagation()}>
+                {pilot.socials.map((social) => {
+                  const Icon = social.platform === 'github' ? Github : social.platform === 'linkedin' ? Linkedin : social.platform === 'instagram' ? Instagram : Twitter;
+                  return (
+                    <motion.a 
+                      key={social.platform}
+                      whileHover={{ scale: 1.1 }} 
+                      whileTap={{ scale: 0.9 }} 
+                      href={social.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="p-3 rounded-full bg-white/5 hover:bg-cyan-500/20 text-cyan-400 transition-colors border border-white/10 hover:border-cyan-400/50"
+                    >
+                      <Icon size={20} />
+                    </motion.a>
+                  );
+                })}
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
