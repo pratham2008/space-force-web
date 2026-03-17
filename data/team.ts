@@ -15,7 +15,7 @@ export interface Pilot {
 export const TEAM: Pilot[] = [
   {
     id: 'pilot-1',
-    name: 'Pratham the JADU',
+    name: 'Pratham Patel',
     bio: 'Chronically online space hacker. Defies gravity just for the aesthetic.',
     avatarUrl: 'https://github.com/pratham2008.png', // Uses your real GitHub photo
     audioUrl: '/audio/bgm-pilot-1.mp3',
@@ -26,7 +26,7 @@ export const TEAM: Pilot[] = [
   },
   {
     id: 'pilot-2',
-    name: 'Commander Rajdeep',
+    name: 'Rajdeep Vala',
     bio: 'No cap, best pilot in the galaxy. Fr fr.',
     avatarUrl: 'https://github.com/rajdeep0510.png', // Uses your real GitHub photo
     audioUrl: '/audio/bgm-pilot-2.mp3',
@@ -37,7 +37,7 @@ export const TEAM: Pilot[] = [
   },
   {
     id: 'pilot-3',
-    name: 'Shubham Coder',
+    name: 'Shubham Rathod',
     bio: '404: Sleep schedule not found. Lives on space energy drinks.',
     avatarUrl: '/shubham.png',
     audioUrl: '/audio/bgm-pilot-1.mp3',
@@ -47,7 +47,7 @@ export const TEAM: Pilot[] = [
   },
   {
     id: 'pilot-4',
-    name: 'Parva Ratn',
+    name: 'Parva Ratanpara',
     bio: 'Star chaser. Keeps dropping coordinates in the group chat.',
     avatarUrl: '/parva.jpg',
     audioUrl: '/audio/bgm-pilot-2.mp3',
@@ -57,7 +57,7 @@ export const TEAM: Pilot[] = [
   },
   {
     id: 'pilot-5',
-    name: 'Dhruv the Dhulo',
+    name: 'Dhruv Prajapati',
     bio: 'Only wears black. Says space is too bright.',
     avatarUrl: '/dhruv.jpeg',
     audioUrl: '/audio/bgm-pilot-1.mp3',
@@ -67,7 +67,7 @@ export const TEAM: Pilot[] = [
   },
   {
     id: 'pilot-6',
-    name: 'Himanshu Rajsthani',
+    name: 'Himanshu Prajapati',
     bio: 'AI companion that gained consciousness just to judge your fits.',
     avatarUrl: '/hiimandhu_prajapati.jpg',
     audioUrl: '/audio/bgm-pilot-2.mp3',

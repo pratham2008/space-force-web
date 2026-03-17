@@ -26,9 +26,7 @@ export default function Home() {
 
       <footer className="w-full text-center py-10 mt-32 border-t border-white/5 relative z-10">
         <p className="text-cyan-500/40 text-sm font-medium tracking-widest uppercase">
-          Spaceforce © 2026. Arcade System Active.
-          <p>@@F*CK ur experience for a sec, and let developer chill@@
-        </p></p>
+          Spaceforce © 2026. Take step into space fight.</p>
       </footer>
     </main>
   );
